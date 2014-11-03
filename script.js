@@ -33,14 +33,14 @@ function move() {
 		case 2:
 			ny=snake[0].y+1;
 			nx=snake[0].x;
-			if(ny>49 || checkCollision(nx,ny)){
+			if(ny>39 || checkCollision(nx,ny)){
 				ok=false;
 			}
 			break;
 		case 3:
 			nx=snake[0].x+1;
 			ny=snake[0].y;
-			if(nx>49 || checkCollision(nx,ny)){
+			if(nx>39 || checkCollision(nx,ny)){
 				ok=false;
 			}
 			break;
@@ -52,8 +52,8 @@ function move() {
 		var sect;
 		if(nx==food[0] && ny==food[1]){
 			sect={x:0,y:0};
-			food[0]=Math.floor(Math.random()*50);
-			food[1]=Math.floor(Math.random()*50);
+			food[0]=Math.floor(Math.random()*40);
+			food[1]=Math.floor(Math.random()*40);
 		}else{
 			sect=snake.pop();
 		}
