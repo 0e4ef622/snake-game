@@ -4,43 +4,54 @@ var snake=[];
 var dir=3; //0 is up, 1 is left, 2 is down, 3 is right
 var debounce=false;
 for(var i=0;i<30;i++)snake.unshift({x:i,y:0});
+function checkCollision(x,y) {
+	for(var i=0;i<snake.length;i++){
+		if(snake[i].x==x && snake[i].y==y){
+			return true;
+		}
+	}
+}
 function move() {
 	snake.unshift(snake.pop());
 	switch(dir){
 		case 0:
 			var ny=snake[1].y-1;
-			if(ny<0){
+			var nx=snake[1].x;
+			if(ny<0 || checkCollision(nx,ny)){
 				snake.push(snake.shift());
 			}else{
 				snake[0].y=ny;
-				snake[0].x=snake[1].x;
+				snake[0].x=nx;
 			}
 			break;
 		case 1:
 			var nx=snake[1].x-1;
-			if(nx<0){
+			var ny=snake[1].y;
+			if(nx<0 || checkCollision(nx,ny)){
 				snake.push(snake.shift());
 			}else{
 				snake[0].x=nx;
-				snake[0].y=snake[1].y;
+				snake[0].y=ny;
 			}
 			break;
 		case 2:
 			var ny=snake[1].y+1;
-			if(ny>49){
+			var nx=snake[1].x;
+			if(ny>49 || checkCollision(nx,ny)){
 				snake.push(snake.shift());
 			}else{
 				snake[0].y=ny;
-				snake[0].x=snake[1].x;
+				snake[0].x=nx;
 			}
 			break;
 		case 3:
 			var nx=snake[1].x+1;
-			if(nx>49){
+			var ny=snake[1].y;
+			if(nx>49 || checkCollision(nx,ny)){
 				snake.push(snake.shift());
 			}else{
 				snake[0].x=nx;
-				snake[0].y=snake[1].y;
+				snake[0].y=ny;
 			}
 			break;
 	}
