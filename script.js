@@ -1,6 +1,7 @@
 var c=document.getElementById("c");
 var ctx=c.getContext("2d");
 var snake=[];
+var food=[25,25];
 var dir=3; //0 is up, 1 is left, 2 is down, 3 is right
 var debounce=false;
 for(var i=0;i<30;i++)snake.unshift({x:i,y:0});
@@ -12,48 +13,53 @@ function checkCollision(x,y) {
 	}
 }
 function move() {
-	snake.unshift(snake.pop());
+	var nx,ny;
+	var ok=true;
 	switch(dir){
 		case 0:
-			var ny=snake[1].y-1;
-			var nx=snake[1].x;
+			ny=snake[0].y-1;
+			nx=snake[0].x;
 			if(ny<0 || checkCollision(nx,ny)){
-				snake.push(snake.shift());
-			}else{
-				snake[0].y=ny;
-				snake[0].x=nx;
+				ok=false;
 			}
 			break;
 		case 1:
-			var nx=snake[1].x-1;
-			var ny=snake[1].y;
+			nx=snake[0].x-1;
+			ny=snake[0].y;
 			if(nx<0 || checkCollision(nx,ny)){
-				snake.push(snake.shift());
-			}else{
-				snake[0].x=nx;
-				snake[0].y=ny;
+				ok=false;
 			}
 			break;
 		case 2:
-			var ny=snake[1].y+1;
-			var nx=snake[1].x;
+			ny=snake[0].y+1;
+			nx=snake[0].x;
 			if(ny>49 || checkCollision(nx,ny)){
-				snake.push(snake.shift());
-			}else{
-				snake[0].y=ny;
-				snake[0].x=nx;
+				ok=false;
 			}
 			break;
 		case 3:
-			var nx=snake[1].x+1;
-			var ny=snake[1].y;
+			nx=snake[0].x+1;
+			ny=snake[0].y;
 			if(nx>49 || checkCollision(nx,ny)){
-				snake.push(snake.shift());
-			}else{
-				snake[0].x=nx;
-				snake[0].y=ny;
+				ok=false;
 			}
 			break;
+		default:
+			throw "Invalid direction";
+			break;
+	}
+	if(ok){
+		var sect;
+		if(nx==food[0] && ny==food[1]){
+			sect={x:0,y:0};
+			food[0]=Math.floor(Math.random()*50);
+			food[1]=Math.floor(Math.random()*50);
+		}else{
+			sect=snake.pop();
+		}
+		snake.unshift(sect);
+		sect.x=nx;
+		sect.y=ny;
 	}
 }
 function drawSnake() {
@@ -73,6 +79,7 @@ setInterval(function() {
 	move();
 	ctx.clearRect(0,0,500,500);
 	drawSnake();
+	ctx.fillRect(food[0]*10+2,food[1]*10+2,6,6);
 	debounce=false;
 },100);
 

@@ -6,9 +6,10 @@ The simple snake game where you eat food to get bigger and try to avoid eating y
 * Move around as a 30 block long snake
 * Stay inside the square
 * No running through your body
+* Eat food to get longer
 
 ##### Coming soon
-* Food
 * Losing
 * Pause button
 * Other buttons
+* DPad for touchscreen devices
