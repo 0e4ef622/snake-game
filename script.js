@@ -52,8 +52,10 @@ function move() {
 		var sect;
 		if(nx==food[0] && ny==food[1]){
 			sect={x:0,y:0};
-			food[0]=Math.floor(Math.random()*40);
-			food[1]=Math.floor(Math.random()*40);
+			do {
+				food[0]=Math.floor(Math.random()*40);
+				food[1]=Math.floor(Math.random()*40);
+			} while(checkCollision(food[0],food[1]))
 		}else{
 			sect=snake.pop();
 		}
