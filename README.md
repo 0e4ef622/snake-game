@@ -8,7 +8,7 @@ The simple snake game where you eat food to get bigger and try to avoid eating y
 * No running through your body
 * Eat food to get longer
 
-##### ~Coming soon~
+##### ~~Coming soon~~
 * Losing
 * Pause button
 * Other buttons
